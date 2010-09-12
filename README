@@ -1,0 +1,11 @@
+A GUI version of tcp planetwars
+
+You need cmake, qt-dev, g++ to compile this package.
+
+To compile:
+cmake .
+make
+
+To run:
+./qtcpplanetwars
+
