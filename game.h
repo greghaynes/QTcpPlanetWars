@@ -34,6 +34,7 @@ class Game
 
   private Q_SLOTS:
     void connected();
+    void disconnected();
     void connectionError(QAbstractSocket::SocketError socketError);
     void botStarted();
     void botError(QProcess::ProcessError error);

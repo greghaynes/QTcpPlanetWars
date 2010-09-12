@@ -19,6 +19,8 @@ Game::Game(const QString &hostname,
   m_socket = new QTcpSocket(this);
   connect(m_socket, SIGNAL(connected()),
     this, SLOT(connected()));
+  connect(m_socket, SIGNAL(disconnected()),
+    this, SLOT(disconnected()));
   connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)),
     this, SLOT(connectionError(QAbstractSocket::SocketError)));
   connect(m_socket, SIGNAL(readyRead()),
@@ -52,6 +54,11 @@ void Game::connected()
   m_socket->write("USER ");
   m_socket->write(m_username.toAscii());
   m_socket->write("\n");
+}
+
+void Game::disconnected()
+{
+  deleteLater();
 }
 
 void Game::connectionError(QAbstractSocket::SocketError socketError)
