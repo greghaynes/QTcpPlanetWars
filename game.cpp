@@ -1,5 +1,8 @@
 #include "game.h"
 
+#include <QDebug>
+#include <QByteArray>
+
 Game::Game(const QString &hostname,
       quint16 port,
       const QString &username,
@@ -11,6 +14,7 @@ Game::Game(const QString &hostname,
   m_hostname = hostname;
   m_port = port;
   m_botPath = botPath;
+  m_started = false;
 
   m_socket = new QTcpSocket(this);
   connect(m_socket, SIGNAL(connected()),
@@ -33,21 +37,17 @@ Game::Game(const QString &hostname,
 
 void Game::play()
 {
-  
-  m_socket->connectToHost(m_hostname, m_port);
-}
+  if(m_username.isEmpty())
+    emit(error(NO_USERNAME));
 
-QTcpSocket *Game::socket()
-{
-  return m_socket;
+  m_process->start(m_botPath);
 }
 
 void Game::connected()
 {
-  if(m_username.isEmpty())
-    emit(error(NO_USERNAME));
-
-
+  m_socket->write("USER ");
+  m_socket->write(m_username.toAscii());
+  m_socket->write("\n");
 }
 
 void Game::connectionError(QAbstractSocket::SocketError socketError)
@@ -56,18 +56,32 @@ void Game::connectionError(QAbstractSocket::SocketError socketError)
 
 void Game::botStarted()
 {
+  m_socket->connectToHost(m_hostname, m_port);
 }
 
-void Game::botError(QProcess::ProcessError error)
+void Game::botError(QProcess::ProcessError e)
 {
+  emit(error(BAD_BOT_PATH));
 }
 
 void Game::botResponded()
 {
+  QByteArray data = m_process->readAll();
+  qDebug() << data;
+  m_socket->write(data);
 }
 
 void Game::serverResponded()
 {
+  while(m_socket->isReadable())
+  {
+    QString line = m_socket->readLine();
+    qDebug() << line;
+    if(line.startsWith("INFO"))
+      continue;
+    else
+      m_process->write(line.toAscii());
+  }
 }
 
 #include "game.moc"

@@ -15,6 +15,7 @@ class Game
     enum Error {
       NO_USERNAME,
       BAD_BOT_PATH,
+      CONNECTION_ERROR,
     };
 
     Game(const QString &hostname,
@@ -25,10 +26,9 @@ class Game
 
     void play();
 
-    QTcpSocket *socket();
-
   Q_SIGNALS:
     void error(Game::Error e);
+    void started();
 
   private Q_SLOTS:
     void connected();
@@ -45,6 +45,7 @@ class Game
     QString m_botPath;
     QString m_hostname;
     quint16 m_port;
+    bool m_started;
 
 };
 
