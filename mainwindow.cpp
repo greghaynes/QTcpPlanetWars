@@ -57,8 +57,7 @@ void MainWindow::gameError(Game::Error e)
 void MainWindow::gameInfo(const QString info)
 {
   QString tinfo = info;
-  tinfo.prepend("<font color=\"red\">");
-  tinfo.append("<font color=\"white\"><br />");
+  tinfo.append("<br />");
   term.append(tinfo);
   updateTerm();
 }

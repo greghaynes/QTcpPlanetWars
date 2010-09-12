@@ -19,8 +19,8 @@ Game::Game(const QString &hostname,
   m_socket = new QTcpSocket(this);
   connect(m_socket, SIGNAL(connected()),
     this, SLOT(connected()));
-  connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError socketError)),
-    this, SLOT(connectionError(QAbstractSocket::SocketError socketError)));
+  connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)),
+    this, SLOT(connectionError(QAbstractSocket::SocketError)));
   connect(m_socket, SIGNAL(readyRead()),
     this, SLOT(serverResponded()));
 
@@ -31,8 +31,8 @@ Game::Game(const QString &hostname,
     this, SLOT(botResponded()));
   connect(m_process, SIGNAL(started()),
     this, SLOT(botStarted()));
-  connect(m_process, SIGNAL(error(ProcessError error)),
-    this, SLOT(botError(QProcess::ProcessError error)));
+  connect(m_process, SIGNAL(error(QProcess::ProcessError)),
+    this, SLOT(botError(QProcess::ProcessError)));
 }
 
 void Game::play()
