@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "game.h"
+
 #include <QMainWindow>
 #include <QString>
 
@@ -24,10 +26,16 @@ class MainWindow
 
   private Q_SLOTS:
     void setBotSelected(bool);
+    void gameError(Game::Error e);
+    void gameInfo(const QString info);
+    void gameState(const QString state);
 
   private:
+    void updateTerm();
+
     QString botPath;
     Ui::MainWindow *ui;
+    QString term;
 
 };
 

@@ -85,9 +85,15 @@ void Game::serverResponded()
       return;
     qDebug() << line;
     if(line.startsWith("INFO"))
+    {
+      emit(info(line));
       continue;
+    }
     else
+    {
+      emit(state(line));
       m_process->write(line.toAscii());
+    }
   }
 }
 

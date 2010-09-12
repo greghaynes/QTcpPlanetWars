@@ -29,6 +29,8 @@ class Game
   Q_SIGNALS:
     void error(Game::Error e);
     void started();
+    void info(const QString&);
+    void state(const QString&);
 
   private Q_SLOTS:
     void connected();
