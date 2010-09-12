@@ -26,12 +26,12 @@ Game::Game(const QString &hostname,
 
   m_process = new QProcess(this);
   m_process->setProcessChannelMode(QProcess::SeparateChannels);
-  m_process->setReadChannel(QProcess::StandardError);
+  m_process->setReadChannel(QProcess::StandardOutput);
   connect(m_process, SIGNAL(readyRead()),
     this, SLOT(botResponded()));
   connect(m_process, SIGNAL(started()),
     this, SLOT(botStarted()));
-  connect(m_process, SIGNAL(error(QProcess::ProcessError error)),
+  connect(m_process, SIGNAL(error(ProcessError error)),
     this, SLOT(botError(QProcess::ProcessError error)));
 }
 
@@ -45,6 +45,7 @@ void Game::play()
 
 void Game::connected()
 {
+  qDebug() << "Connected to server";
   m_socket->write("USER ");
   m_socket->write(m_username.toAscii());
   m_socket->write("\n");
@@ -56,6 +57,7 @@ void Game::connectionError(QAbstractSocket::SocketError socketError)
 
 void Game::botStarted()
 {
+  qDebug() << "Bot running";
   m_socket->connectToHost(m_hostname, m_port);
 }
 
@@ -73,9 +75,11 @@ void Game::botResponded()
 
 void Game::serverResponded()
 {
-  while(m_socket->isReadable())
+  while(m_socket->bytesAvailable() > 0)
   {
     QString line = m_socket->readLine();
+    if(line.isEmpty())
+      return;
     qDebug() << line;
     if(line.startsWith("INFO"))
       continue;

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "game.h"
 
 #include <QFileDialog>
 
@@ -12,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   connect(ui->actionOpen, SIGNAL(triggered(bool)),
     this, SLOT(selectPath()));
+  connect(ui->playGamePushButton, SIGNAL(clicked(bool)),
+    this, SLOT(play()));
 
   setBotSelected(false);
 }
@@ -19,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setBotPath(const QString &path)
 {
   botPath = path;
+  setBotSelected(true);
 }
 
 void MainWindow::selectPath()
@@ -27,6 +31,14 @@ void MainWindow::selectPath()
   connect(dialog, SIGNAL(fileSelected(const QString&)),
           this, SLOT(setBotPath(const QString&)));
   dialog->show();
+}
+
+void MainWindow::play()
+{
+  Game *g = new Game("213.3.30.106", 9999,
+         ui->usernameLineEdit->text(),
+         botPath, this);
+  g->play();
 }
 
 void MainWindow::setBotSelected(bool value)
