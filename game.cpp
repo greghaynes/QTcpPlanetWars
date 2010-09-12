@@ -38,7 +38,10 @@ Game::Game(const QString &hostname,
 void Game::play()
 {
   if(m_username.isEmpty())
+  {
     emit(error(NO_USERNAME));
+    return;
+  }
 
   m_process->start(m_botPath);
 }
