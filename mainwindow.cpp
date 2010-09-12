@@ -9,8 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
   ui = new Ui::MainWindow();
   ui->setupUi(this);
+
+  connect(ui->actionOpen, SIGNAL(triggered(bool)),
+    this, SLOT(selectPath()));
+
   setBotSelected(false);
-  selectPath();
 }
 
 void MainWindow::setBotPath(const QString &path)
