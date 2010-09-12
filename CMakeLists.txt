@@ -1,14 +1,16 @@
 project(QTcpPlanetWars)
 
-find_package(Qt COMPONENTS QtCore QtGui REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtGui QtNetwork REQUIRED)
 include(${QT_USE_FILE})
 
 set(planetwars_SRCS
   main.cpp
-  mainwindow.cpp)
+  mainwindow.cpp
+  game.cpp)
 
 set(planetwars_HDRS
-  mainwindow.h)
+  mainwindow.h
+  game.h)
 
 set(planetwars_UI
   ui/mainwindow.ui)
