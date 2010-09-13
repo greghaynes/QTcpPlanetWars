@@ -63,6 +63,8 @@ void MainWindow::gameError(Game::Error e)
     case Game::CONNECTION_ERROR:
       term.append("Could not connect to server.");
       break;
+    case Game::NO_USERNAME:
+      term.append("No username specified.");
   }
   updateTerm();
 }
