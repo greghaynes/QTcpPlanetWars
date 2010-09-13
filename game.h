@@ -27,6 +27,8 @@ class Game
       QObject *parent = 0);
 
     void play();
+    const Player &me();
+    const Player &opponent();
 
   Q_SIGNALS:
     void error(Game::Error e);

@@ -45,7 +45,7 @@ void MainWindow::play()
   connect(g, SIGNAL(waiting(const Player&)),
           this, SLOT(gameWaiting(const Player&)));
   connect(g, SIGNAL(ended(bool)),
-          this, SLOT(gameEnded(boo)));
+          this, SLOT(gameEnded(bool)));
   g->play();
 }
 
@@ -93,12 +93,15 @@ void MainWindow::gameWaiting(const Player &me)
 
 void MainWindow::gameEnded(bool i_won)
 {
+  Game *g = static_cast<Game*>(sender());
   term.append("You ");
   if(i_won)
-    term.append("<font color=\"green\">won</font>!");
+    term.append("<font color=\"green\">won</font> ");
   else
-    term.append("<font colot=\"red\">lost</font>.");
-  term.append("<br />");
+    term.append("<font color=\"red\">lost</font> ");
+  term.append("against ");
+  term.append(g->opponent().username());
+  term.append(".<br />");
   updateTerm();
 }
 

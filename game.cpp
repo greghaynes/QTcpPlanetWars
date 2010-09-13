@@ -49,6 +49,16 @@ void Game::play()
   m_process->start(m_botPath);
 }
 
+const Player &Game::me()
+{
+  return my_player;
+}
+
+const Player &Game::opponent()
+{
+  return opponent_player;
+}
+
 void Game::connected()
 {
   qDebug() << "Connected to server";
@@ -64,7 +74,8 @@ void Game::disconnected()
 
 void Game::connectionError(QAbstractSocket::SocketError socketError)
 {
-  emit(error(CONNECTION_ERROR));
+  if(socketError != QAbstractSocket::RemoteHostClosedError)
+    emit(error(CONNECTION_ERROR));
 }
 
 void Game::botStarted()
@@ -107,11 +118,11 @@ void Game::serverResponded()
         opponent_player.setScore(words[6]);
         emit(started(opponent_player));
       }
-      else if(words[3] == "WIN")
+      else if(line.startsWith("INFO You WIN"))
       {
         emit(ended(true));
       }
-      else if(words[3] == "LOSE")
+      else if(line.startsWith("INFO You LOSE"))
       {
         emit(ended(false));
       }
