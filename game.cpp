@@ -98,14 +98,22 @@ void Game::serverResponded()
       QList<QString> words = line.split(" ");
       if(line.startsWith("INFO You currently have"))
       {
-        my_player.setScore(words[4].toInt());
+        my_player.setScore(words[4]);
         emit(waiting(my_player));
       }
       else if(line.startsWith("INFO Your opponent is"))
       {
         opponent_player.setUsername(words[4]);
-        opponent_player.setScore(words[6].toInt());
+        opponent_player.setScore(words[6]);
         emit(started(opponent_player));
+      }
+      else if(words[3] == "WIN")
+      {
+        emit(ended(true));
+      }
+      else if(words[3] == "LOSE")
+      {
+        emit(ended(false));
       }
       emit(info(line));
       continue;

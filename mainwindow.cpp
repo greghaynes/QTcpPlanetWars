@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->playGamePushButton, SIGNAL(clicked(bool)),
     this, SLOT(play()));
 
+  setWindowTitle("Planet Wars");
   setBotSelected(false);
 }
 
@@ -43,6 +44,8 @@ void MainWindow::play()
           this, SLOT(gameStarted(const Player&)));
   connect(g, SIGNAL(waiting(const Player&)),
           this, SLOT(gameWaiting(const Player&)));
+  connect(g, SIGNAL(ended(bool)),
+          this, SLOT(gameEnded(boo)));
   g->play();
 }
 
@@ -75,7 +78,7 @@ void MainWindow::gameStarted(const Player &opponent)
   term.append("Game started against <font color=\"blue\">");
   term.append(opponent.username());
   term.append("</font> with ELO score of ");
-  term.append(QString(opponent.score()));
+  term.append(opponent.score());
   term.append("<br />");
   updateTerm();
 }
@@ -85,6 +88,17 @@ void MainWindow::gameWaiting(const Player &me)
   term.append("Connected as <font color=\"green\">");
   term.append(me.username());
   term.append("</font>.  Waiting for opponent.<br />");
+  updateTerm();
+}
+
+void MainWindow::gameEnded(bool i_won)
+{
+  term.append("You ");
+  if(i_won)
+    term.append("<font color=\"green\">won</font>!");
+  else
+    term.append("<font colot=\"red\">lost</font>.");
+  term.append("<br />");
   updateTerm();
 }
 

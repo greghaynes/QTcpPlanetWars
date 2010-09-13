@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player(const QString &username,
-               int score,
+               const QString &score,
                QObject *parent)
   : QObject(parent)
 {
@@ -13,12 +13,12 @@ const QString &Player::username() const
   return m_username;
 }
 
-int Player::score() const
+const QString &Player::score() const
 {
   return m_score;
 }
 
-void Player::setScore(int score)
+void Player::setScore(const QString &score)
 {
   m_score = score;
 }

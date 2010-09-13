@@ -30,6 +30,7 @@ class MainWindow
     void gameError(Game::Error e);
     void gameStarted(const Player &opponent);
     void gameWaiting(const Player &me);
+    void gameEnded(bool);
 
   private:
     void updateTerm();

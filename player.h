@@ -10,17 +10,17 @@ class Player
 
   public:
     Player(const QString &username = "",
-           int score = 0,
+           const QString &score = "",
            QObject *parent = 0);
 
     const QString &username() const;
-    int score() const;
-    void setScore(int score);
+    const QString &score() const;
+    void setScore(const QString &score);
     void setUsername(const QString &username);
 
   private:
     QString m_username;
-    int m_score;
+    QString m_score;
 
 };
 

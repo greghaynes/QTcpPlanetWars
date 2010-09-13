@@ -34,6 +34,7 @@ class Game
     void started(const Player &opponent);
     void info(const QString&);
     void state(const QString&);
+    void ended(bool i_won);
 
   private Q_SLOTS:
     void connected();
