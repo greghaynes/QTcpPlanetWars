@@ -74,7 +74,7 @@ void MainWindow::gameError(Game::Error e)
   switch(e)
   {
     case Game::BAD_BOT_PATH:
-      term.append("Invalid path to bot, or could not run bot.");
+      term.append("Invalid path to bot, or could not run bot. Is your bot marked as executable?");
       break;
     case Game::CONNECTION_ERROR:
       term.append("Could not connect to server.");
