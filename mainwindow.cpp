@@ -61,9 +61,11 @@ void MainWindow::play()
   connect(g, SIGNAL(ended(bool)),
           this, SLOT(gameEnded(bool)));
 
-  GameWidget *gw = new GameWidget();
+  GameWidget *gw = new GameWidget("Waiting for opponent...", this);
   connect(g, SIGNAL(state(const QString&)),
           &(gw->gameScene()), SLOT(setGameState(const QString&)));
+  connect(g, SIGNAL(started(const Player &)),
+          gw, SLOT(gameStarted(const Player &)));
   gw->show();
 
   g->play();
