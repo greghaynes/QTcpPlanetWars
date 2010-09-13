@@ -11,6 +11,7 @@ set(planetwars_SRCS
   settings.cpp
   gamescene.cpp
   planet.cpp
+  fleet.cpp
   gamewidget.cpp)
 
 set(planetwars_HDRS
@@ -20,6 +21,7 @@ set(planetwars_HDRS
   settings.h
   gamescene.h
   planet.h
+  fleep.h
   gamewidget.h)
 
 set(planetwars_UI

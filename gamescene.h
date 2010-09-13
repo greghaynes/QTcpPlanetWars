@@ -2,6 +2,7 @@
 #define GAMESCENE_H
 
 #include "planet.h"
+#include "fleet.h"
 
 #include <QList>
 #include <QString>
@@ -22,6 +23,7 @@ class GameScene
     void resetScene();
 
     QList<Planet*> *m_planets;
+    QList<Fleet*> *m_fleets;
 
 };
 
