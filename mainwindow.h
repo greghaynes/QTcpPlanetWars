@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "game.h"
+#include "player.h"
 
 #include <QMainWindow>
 #include <QString>
@@ -27,8 +28,8 @@ class MainWindow
   private Q_SLOTS:
     void setBotSelected(bool);
     void gameError(Game::Error e);
-    void gameInfo(const QString info);
-    void gameState(const QString state);
+    void gameStarted(const Player &opponent);
+    void gameWaiting(const Player &me);
 
   private:
     void updateTerm();

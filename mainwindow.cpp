@@ -37,12 +37,12 @@ void MainWindow::play()
   Game *g = new Game("213.3.30.106", 9999,
          ui->usernameLineEdit->text(),
          botPath, this);
-  connect(g, SIGNAL(info(const QString&)),
-          this, SLOT(gameInfo(const QString&)));
-  connect(g, SIGNAL(state(const QString&)),
-          this, SLOT(gameState(const QString&)));
   connect(g, SIGNAL(error(Game::Error)),
           this, SLOT(gameError(Game::Error)));
+  connect(g, SIGNAL(started(const Player&)),
+          this, SLOT(gameStarted(const Player&)));
+  connect(g, SIGNAL(waiting(const Player&)),
+          this, SLOT(gameWaiting(const Player&)));
   g->play();
 }
 
@@ -66,19 +66,26 @@ void MainWindow::gameError(Game::Error e)
     case Game::NO_USERNAME:
       term.append("No username specified.");
   }
+  term.append("<br />");
   updateTerm();
 }
 
-void MainWindow::gameInfo(const QString info)
+void MainWindow::gameStarted(const Player &opponent)
 {
-  QString tinfo = info;
-  tinfo.append("<br />");
-  term.append(tinfo);
+  term.append("Game started against <font color=\"blue\">");
+  term.append(opponent.username());
+  term.append("</font> with ELO score of ");
+  term.append(QString(opponent.score()));
+  term.append("<br />");
   updateTerm();
 }
 
-void MainWindow::gameState(const QString state)
+void MainWindow::gameWaiting(const Player &me)
 {
+  term.append("Connected as <font color=\"green\">");
+  term.append(me.username());
+  term.append("</font>.  Waiting for opponent.<br />");
+  updateTerm();
 }
 
 void MainWindow::updateTerm()

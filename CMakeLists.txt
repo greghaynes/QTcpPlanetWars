@@ -6,11 +6,13 @@ include(${QT_USE_FILE})
 set(planetwars_SRCS
   main.cpp
   mainwindow.cpp
-  game.cpp)
+  game.cpp
+  player.cpp)
 
 set(planetwars_HDRS
   mainwindow.h
-  game.h)
+  game.h
+  player.h)
 
 set(planetwars_UI
   ui/mainwindow.ui)

@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "player.h"
+
 #include <QObject>
 #include <QString>
 #include <QTcpSocket>
@@ -28,7 +30,8 @@ class Game
 
   Q_SIGNALS:
     void error(Game::Error e);
-    void started();
+    void waiting(const Player &me);
+    void started(const Player &opponent);
     void info(const QString&);
     void state(const QString&);
 
@@ -49,6 +52,8 @@ class Game
     QString m_hostname;
     quint16 m_port;
     bool m_started;
+    Player my_player;
+    Player opponent_player;
 
 };
 

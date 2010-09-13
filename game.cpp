@@ -15,6 +15,7 @@ Game::Game(const QString &hostname,
   m_port = port;
   m_botPath = botPath;
   m_started = false;
+  my_player.setUsername(username);
 
   m_socket = new QTcpSocket(this);
   connect(m_socket, SIGNAL(connected()),
@@ -94,6 +95,18 @@ void Game::serverResponded()
     qDebug() << line;
     if(line.startsWith("INFO"))
     {
+      QList<QString> words = line.split(" ");
+      if(line.startsWith("INFO You currently have"))
+      {
+        my_player.setScore(words[4].toInt());
+        emit(waiting(my_player));
+      }
+      else if(line.startsWith("INFO Your opponent is"))
+      {
+        opponent_player.setUsername(words[4]);
+        opponent_player.setScore(words[6].toInt());
+        emit(started(opponent_player));
+      }
       emit(info(line));
       continue;
     }
