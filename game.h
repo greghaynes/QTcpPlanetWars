@@ -57,6 +57,7 @@ class Game
     bool m_started;
     Player my_player;
     Player opponent_player;
+    QString m_state;
 
 };
 

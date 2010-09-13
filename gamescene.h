@@ -1,5 +1,7 @@
-#ifndef GAMEVIEW_H
-#define GAMEVIEW_H
+#ifndef GAMESCENE_H
+#define GAMESCENE_H
+
+#include "planet.h"
 
 #include <QList>
 #include <QString>
@@ -10,13 +12,14 @@ class GameScene
 {
 
   public:
-    GameView(QObject *parent = 0);
+    GameScene(QObject *parent = 0);
 
     void setGameState(const QString &gameState);
 
   private:
-    QList<Planet> m_planets;
-    QList<Fleet> m_fleets;
+    void resetScene();
+
+    QList<Planet*> *m_planets;
 
 };
 

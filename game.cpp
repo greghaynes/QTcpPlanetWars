@@ -129,9 +129,14 @@ void Game::serverResponded()
       emit(info(line));
       continue;
     }
+    else if(line.startsWith("go"))
+    {
+      emit(state(m_state));
+      m_state = "";
+    }
     else
     {
-      emit(state(line));
+      m_state.append(line);
       m_process->write(line.toAscii());
     }
   }

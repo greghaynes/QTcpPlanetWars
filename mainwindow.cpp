@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "settings.h"
+#include "gamewidget.h"
 
 #include <QFileDialog>
 #include <QVariant>
@@ -59,6 +60,8 @@ void MainWindow::play()
           this, SLOT(gameWaiting(const Player&)));
   connect(g, SIGNAL(ended(bool)),
           this, SLOT(gameEnded(bool)));
+
+  GameWidget *gw = new GameWidget();
   g->play();
 }
 
