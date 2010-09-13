@@ -62,6 +62,10 @@ void MainWindow::play()
           this, SLOT(gameEnded(bool)));
 
   GameWidget *gw = new GameWidget();
+  connect(g, SIGNAL(state(const QString&)),
+          &(gw->gameScene()), SLOT(setGameState(const QString&)));
+  gw->show();
+
   g->play();
 }
 

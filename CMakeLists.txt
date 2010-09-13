@@ -23,7 +23,8 @@ set(planetwars_HDRS
   gamewidget.h)
 
 set(planetwars_UI
-  ui/mainwindow.ui)
+  ui/mainwindow.ui
+  ui/gamewidget.ui)
 
 QT4_WRAP_UI(planetwarsui ${planetwars_UI})
 QT4_AUTOMOC(${planetwars_SRCS})

@@ -10,10 +10,12 @@
 class GameScene
   : public QGraphicsScene
 {
+  Q_OBJECT
 
   public:
     GameScene(QObject *parent = 0);
 
+  public Q_SLOTS:
     void setGameState(const QString &gameState);
 
   private:

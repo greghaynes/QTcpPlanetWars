@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>722</width>
-    <height>477</height>
+    <width>618</width>
+    <height>646</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Planet Wars Game Viewer</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -52,7 +52,17 @@
     </layout>
    </item>
    <item>
-    <widget class="QGraphicsView" name="graphicsView"/>
+    <widget class="QGraphicsView" name="graphicsView">
+     <property name="interactive">
+      <bool>false</bool>
+     </property>
+     <property name="resizeAnchor">
+      <enum>QGraphicsView::AnchorViewCenter</enum>
+     </property>
+     <property name="viewportUpdateMode">
+      <enum>QGraphicsView::SmartViewportUpdate</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

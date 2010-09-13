@@ -1,5 +1,9 @@
 #include "gamescene.h"
 
+#include <QColor>
+#include <QPen>
+#include <QBrush>
+
 GameScene::GameScene(QObject *parent)
 {
   m_planets = new QList<Planet*>();
@@ -34,6 +38,8 @@ void GameScene::setGameState(const QString &gameState)
       }
     }
   }
+
+  resetScene();
 }
 
 void GameScene::resetScene()
@@ -43,7 +49,17 @@ void GameScene::resetScene()
   Planet *p;
   foreach(p, *m_planets)
   {
-    addEllipse(p->x(), p->y(), p->growthRate(), p->growthRate());
+    int growthRate = p->growthRate();
+    if(growthRate < 2) growthRate = 3;
+    growthRate *= 6;
+    if(p->owner() == 1)
+    	addEllipse(p->x() * 18, p->y() * 18, growthRate, growthRate, QPen(), QBrush(Qt::blue));
+    else if(p->owner() == 2)
+    	addEllipse(p->x() * 18, p->y() * 18, growthRate, growthRate, QPen(), QBrush(Qt::red));
+    else
+    	addEllipse(p->x() * 18, p->y() * 18, growthRate, growthRate, QPen(), QBrush(Qt::lightGray));
   }
 }
+
+#include "gamescene.moc"
 
