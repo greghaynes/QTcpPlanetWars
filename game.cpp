@@ -63,6 +63,7 @@ void Game::disconnected()
 
 void Game::connectionError(QAbstractSocket::SocketError socketError)
 {
+  emit(error(CONNECTION_ERROR));
 }
 
 void Game::botStarted()

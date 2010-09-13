@@ -41,6 +41,8 @@ void MainWindow::play()
           this, SLOT(gameInfo(const QString&)));
   connect(g, SIGNAL(state(const QString&)),
           this, SLOT(gameState(const QString&)));
+  connect(g, SIGNAL(error(Game::Error)),
+          this, SLOT(gameError(Game::Error)));
   g->play();
 }
 
@@ -52,6 +54,17 @@ void MainWindow::setBotSelected(bool value)
 
 void MainWindow::gameError(Game::Error e)
 {
+  term.append("<font color=\"red\">Error!</font> ");
+  switch(e)
+  {
+    case Game::BAD_BOT_PATH:
+      term.append("Invalid path to bot, or could not run bot.");
+      break;
+    case Game::CONNECTION_ERROR:
+      term.append("Could not connect to server.");
+      break;
+  }
+  updateTerm();
 }
 
 void MainWindow::gameInfo(const QString info)
