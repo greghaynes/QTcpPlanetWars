@@ -65,9 +65,9 @@ void GameScene::setGameState(const QString &gameState)
 void GameScene::resetScene()
 {
   clear();
+  QFontMetrics fm = QFontMetrics(font());
 
   Planet *p;
-  QFontMetrics fm = QFontMetrics(font());
   foreach(p, *m_planets)
   {
     int growthRate = p->growthRate() + 1;
@@ -85,6 +85,29 @@ void GameScene::resetScene()
     sizeItem->setPos((p->x() * 20) - (fm.width(psize) / 2.0f) + (growthRate / 2.0f),
                      (p->y() * 20) - (fm.height() / 2.0f) + (growthRate / 2.0f));
     addItem(sizeItem);
+  }
+
+  Fleet *f;
+  foreach(f, *m_fleets)
+  {
+    float xdist = (*m_planets)[f->destination()]->x() - (*m_planets)[f->source()]->x();
+    float ydist = (*m_planets)[f->destination()]->y() - (*m_planets)[f->source()]->y();
+    float tripTaken = f->tripLength() - f->turnsRemaining();
+    xdist *= 20;
+    ydist *= 20;
+    float x = ((*m_planets)[f->source()]->x()*20 + (xdist * (tripTaken / f->tripLength())));
+    float y = ((*m_planets)[f->source()]->y()*20 + (ydist  * (tripTaken / f->tripLength())));
+    QGraphicsTextItem *fleetItem = new QGraphicsTextItem("");
+    fleetItem->setPos(x, y);
+    QString fleetHtml;
+    if(f->owner() == 1)
+      fleetHtml.append("<font color=\"cyan\">");
+    else if(f->owner() == 2)
+      fleetHtml.append("<font color=\"red\">");
+    fleetHtml.append(QString::number(f->numShips()));
+    fleetHtml.append("</font>");
+    fleetItem->setHtml(fleetHtml);
+    addItem(fleetItem);
   }
 }
 
