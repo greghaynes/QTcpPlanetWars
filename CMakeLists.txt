@@ -7,12 +7,14 @@ set(planetwars_SRCS
   main.cpp
   mainwindow.cpp
   game.cpp
-  player.cpp)
+  player.cpp
+  settings.cpp)
 
 set(planetwars_HDRS
   mainwindow.h
   game.h
-  player.h)
+  player.h
+  settings.h)
 
 set(planetwars_UI
   ui/mainwindow.ui)

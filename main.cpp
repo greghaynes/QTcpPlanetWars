@@ -7,6 +7,7 @@ int main(int argc, char **argv) {
   MainWindow *m = new MainWindow();
   m->show();
   m->selectPath();
-  return app.exec();
+  app.exec();
+  delete m;
 }
 

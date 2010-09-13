@@ -19,6 +19,7 @@ class MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
   public Q_SLOTS:
     void setBotPath(const QString &path);

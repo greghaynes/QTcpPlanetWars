@@ -1,6 +1,8 @@
 #include "mainwindow.h"
+#include "settings.h"
 
 #include <QFileDialog>
+#include <QVariant>
 
 #include "ui_mainwindow.h"
 
@@ -15,8 +17,19 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->playGamePushButton, SIGNAL(clicked(bool)),
     this, SLOT(play()));
 
+  QVariant usernameVariant = Settings::instance()->value("username");
+  if(usernameVariant != QVariant())
+  {
+    ui->usernameLineEdit->setText(usernameVariant.toString());
+  }
+
   setWindowTitle("Planet Wars");
   setBotSelected(false);
+}
+
+MainWindow::~MainWindow()
+{
+  Settings::instance()->setValue("username", QVariant(ui->usernameLineEdit->text()));
 }
 
 void MainWindow::setBotPath(const QString &path)
