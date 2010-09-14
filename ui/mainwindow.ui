@@ -50,7 +50,7 @@
       <item>
        <widget class="QLineEdit" name="passwordLineEdit">
         <property name="echoMode">
-         <enum>QLineEdit::PasswordEchoOnEdit</enum>
+         <enum>QLineEdit::Password</enum>
         </property>
        </widget>
       </item>
