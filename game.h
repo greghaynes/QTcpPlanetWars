@@ -23,6 +23,7 @@ class Game
     Game(const QString &hostname,
       quint16 port,
       const QString &username,
+      const QString &password,
       const QString &botPath,
       QObject *parent = 0);
 
@@ -51,6 +52,7 @@ class Game
     QTcpSocket *m_socket;
     QProcess *m_process;
     QString m_username;
+    QString m_password;
     QString m_botPath;
     QString m_hostname;
     quint16 m_port;

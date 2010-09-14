@@ -51,6 +51,7 @@ void MainWindow::play()
 {
   Game *g = new Game("213.3.30.106", 9999,
          ui->usernameLineEdit->text(),
+         ui->passwordLineEdit->text(),
          botPath, this);
   connect(g, SIGNAL(error(Game::Error)),
           this, SLOT(gameError(Game::Error)));

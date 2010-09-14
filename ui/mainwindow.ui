@@ -41,6 +41,20 @@
        <widget class="QLineEdit" name="usernameLineEdit"/>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Password:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="passwordLineEdit">
+        <property name="echoMode">
+         <enum>QLineEdit::PasswordEchoOnEdit</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="playGamePushButton">
         <property name="text">
          <string>Play Game</string>

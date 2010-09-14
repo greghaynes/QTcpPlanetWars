@@ -6,11 +6,13 @@
 Game::Game(const QString &hostname,
       quint16 port,
       const QString &username,
+      const QString &password,
       const QString &botPath,
       QObject *parent)
   : QObject(parent)
 {
   m_username = username;
+  m_password = password;
   m_hostname = hostname;
   m_port = port;
   m_botPath = botPath;
@@ -45,8 +47,15 @@ void Game::play()
     emit(error(NO_USERNAME));
     return;
   }
+  QList<QString> args;
 
-  m_process->start(m_botPath);
+  if(m_botPath.endsWith(".class"))
+  {
+    args.append(m_botPath.left(m_botPath.length() - 6));
+    m_botPath = "java";
+  }
+  qDebug() << "executing: " << m_botPath << " with args " << args;
+  m_process->start(m_botPath, args);
 }
 
 const Player &Game::me()
@@ -64,6 +73,11 @@ void Game::connected()
   qDebug() << "Connected to server";
   m_socket->write("USER ");
   m_socket->write(m_username.toAscii());
+  if(m_password != "")
+  {
+    m_socket->write(" PASS ");
+    m_socket->write(m_password.toAscii());
+  }
   m_socket->write("\n");
 }
 
