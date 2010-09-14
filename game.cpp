@@ -51,7 +51,9 @@ void Game::play()
 
   if(m_botPath.endsWith(".class"))
   {
-    args.append(m_botPath.left(m_botPath.length() - 6));
+    QList<QString> dirs = m_botPath.split("/");
+    m_process->setWorkingDirectory(m_botPath.left(m_botPath.length() - (dirs.last().length())));
+    args.append(dirs.last().left(dirs.last().length() - 6));
     m_botPath = "java";
   }
   qDebug() << "executing: " << m_botPath << " with args " << args;
