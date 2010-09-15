@@ -49,7 +49,7 @@ void MainWindow::selectPath()
 
 void MainWindow::play()
 {
-  Game *g = new Game("213.3.30.106", 9999,
+  Game *g = new Game(ui->serverLineEdit->text(), 9999,
          ui->usernameLineEdit->text(),
          ui->passwordLineEdit->text(),
          botPath, this);

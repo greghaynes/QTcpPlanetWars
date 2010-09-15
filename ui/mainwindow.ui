@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>752</width>
-    <height>591</height>
+    <width>764</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,6 +29,16 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Server:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="serverLineEdit"/>
       </item>
       <item>
        <widget class="QLabel" name="label">
@@ -86,7 +96,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>752</width>
+     <width>764</width>
      <height>23</height>
     </rect>
    </property>
