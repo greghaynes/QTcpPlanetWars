@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
   ui = new Ui::MainWindow();
   ui->setupUi(this);
+  ui->serverLineEdit->setText("72.44.46.68");
 
   connect(ui->actionOpen, SIGNAL(triggered(bool)),
     this, SLOT(selectPath()));
@@ -49,7 +50,7 @@ void MainWindow::selectPath()
 
 void MainWindow::play()
 {
-  Game *g = new Game(ui->serverLineEdit->text(), 9999,
+  Game *g = new Game(ui->serverLineEdit->text(), 995,
          ui->usernameLineEdit->text(),
          ui->passwordLineEdit->text(),
          botPath, this);
